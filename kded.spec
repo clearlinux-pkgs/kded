@@ -5,21 +5,21 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kded
-Version  : 5.50.0
-Release  : 3
-URL      : https://download.kde.org/stable/frameworks/5.50/kded-5.50.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.50/kded-5.50.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.50/kded-5.50.0.tar.xz.sig
+Version  : 5.51.0
+Release  : 4
+URL      : https://download.kde.org/stable/frameworks/5.51/kded-5.51.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.51/kded-5.51.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.51/kded-5.51.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
-Requires: kded-bin
-Requires: kded-data
-Requires: kded-license
-Requires: kded-man
+Requires: kded-bin = %{version}-%{release}
+Requires: kded-data = %{version}-%{release}
+Requires: kded-license = %{version}-%{release}
+Requires: kded-man = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
-BuildRequires : qtbase-dev qtbase-extras mesa-dev
+BuildRequires : qtbase-dev mesa-dev
 
 %description
 # KDED
@@ -32,9 +32,9 @@ Some of these tasks are built in, others are started on demand.
 %package bin
 Summary: bin components for the kded package.
 Group: Binaries
-Requires: kded-data
-Requires: kded-license
-Requires: kded-man
+Requires: kded-data = %{version}-%{release}
+Requires: kded-license = %{version}-%{release}
+Requires: kded-man = %{version}-%{release}
 
 %description bin
 bin components for the kded package.
@@ -51,9 +51,9 @@ data components for the kded package.
 %package dev
 Summary: dev components for the kded package.
 Group: Development
-Requires: kded-bin
-Requires: kded-data
-Provides: kded-devel
+Requires: kded-bin = %{version}-%{release}
+Requires: kded-data = %{version}-%{release}
+Provides: kded-devel = %{version}-%{release}
 
 %description dev
 dev components for the kded package.
@@ -76,26 +76,26 @@ man components for the kded package.
 
 
 %prep
-%setup -q -n kded-5.50.0
+%setup -q -n kded-5.51.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1536431929
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1539649102
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
-make  %{?_smp_mflags}
+make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1536431929
+export SOURCE_DATE_EPOCH=1539649102
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/kded
-cp COPYING.LGPL-2 %{buildroot}/usr/share/doc/kded/COPYING.LGPL-2
-cp COPYING.LIB %{buildroot}/usr/share/doc/kded/COPYING.LIB
+mkdir -p %{buildroot}/usr/share/package-licenses/kded
+cp COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kded/COPYING.LGPL-2
+cp COPYING.LIB %{buildroot}/usr/share/package-licenses/kded/COPYING.LIB
 pushd clr-build
 %make_install
 popd
@@ -122,12 +122,12 @@ popd
 /usr/lib64/libkdeinit5_kded5.so
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/kded/COPYING.LGPL-2
-/usr/share/doc/kded/COPYING.LIB
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/kded/COPYING.LGPL-2
+/usr/share/package-licenses/kded/COPYING.LIB
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/ca/man8/kded5.8
 /usr/share/man/de/man8/kded5.8
 /usr/share/man/es/man8/kded5.8
