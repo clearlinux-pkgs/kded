@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kded
-Version  : 5.51.0
-Release  : 4
-URL      : https://download.kde.org/stable/frameworks/5.51/kded-5.51.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.51/kded-5.51.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.51/kded-5.51.0.tar.xz.sig
+Version  : 5.52.0
+Release  : 5
+URL      : https://download.kde.org/stable/frameworks/5.52/kded-5.52.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.52/kded-5.52.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.52/kded-5.52.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
@@ -28,6 +28,14 @@ Central daemon of KDE work spaces
 KDED stands for KDE Daemon which isn't very descriptive.
 KDED runs in the background and performs a number of small tasks.
 Some of these tasks are built in, others are started on demand.
+
+%package abi
+Summary: abi components for the kded package.
+Group: Default
+
+%description abi
+abi components for the kded package.
+
 
 %package bin
 Summary: bin components for the kded package.
@@ -76,14 +84,14 @@ man components for the kded package.
 
 
 %prep
-%setup -q -n kded-5.51.0
+%setup -q -n kded-5.52.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1539649102
+export SOURCE_DATE_EPOCH=1541882186
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -91,7 +99,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1539649102
+export SOURCE_DATE_EPOCH=1541882186
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kded
 cp COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kded/COPYING.LGPL-2
@@ -103,6 +111,10 @@ popd
 %files
 %defattr(-,root,root,-)
 
+%files abi
+%defattr(-,root,root,-)
+/usr/share/abi/libkdeinit5_kded5.so.abi
+
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/kded5
@@ -112,6 +124,7 @@ popd
 /usr/share/dbus-1/interfaces/org.kde.kded5.xml
 /usr/share/dbus-1/services/org.kde.kded5.service
 /usr/share/kservicetypes5/kdedmodule.desktop
+/usr/share/xdg/kded.categories
 
 %files dev
 %defattr(-,root,root,-)
