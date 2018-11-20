@@ -6,7 +6,7 @@
 #
 Name     : kded
 Version  : 5.52.0
-Release  : 5
+Release  : 6
 URL      : https://download.kde.org/stable/frameworks/5.52/kded-5.52.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.52/kded-5.52.0.tar.xz
 Source99 : https://download.kde.org/stable/frameworks/5.52/kded-5.52.0.tar.xz.sig
@@ -28,14 +28,6 @@ Central daemon of KDE work spaces
 KDED stands for KDE Daemon which isn't very descriptive.
 KDED runs in the background and performs a number of small tasks.
 Some of these tasks are built in, others are started on demand.
-
-%package abi
-Summary: abi components for the kded package.
-Group: Default
-
-%description abi
-abi components for the kded package.
-
 
 %package bin
 Summary: bin components for the kded package.
@@ -91,7 +83,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1541882186
+export SOURCE_DATE_EPOCH=1542740174
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -99,7 +91,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1541882186
+export SOURCE_DATE_EPOCH=1542740174
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kded
 cp COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kded/COPYING.LGPL-2
@@ -110,10 +102,6 @@ popd
 
 %files
 %defattr(-,root,root,-)
-
-%files abi
-%defattr(-,root,root,-)
-/usr/share/abi/libkdeinit5_kded5.so.abi
 
 %files bin
 %defattr(-,root,root,-)
