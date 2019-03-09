@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kded
-Version  : 5.55.0
-Release  : 11
-URL      : https://download.kde.org/stable/frameworks/5.55/kded-5.55.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.55/kded-5.55.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.55/kded-5.55.0.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 5.56.0
+Release  : 12
+URL      : https://download.kde.org/stable/frameworks/5.56/kded-5.56.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.56/kded-5.56.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.56/kded-5.56.0.tar.xz.sig
+Summary  : Extensible deamon for providing system level services
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
 Requires: kded-bin = %{version}-%{release}
@@ -35,7 +35,6 @@ Summary: bin components for the kded package.
 Group: Binaries
 Requires: kded-data = %{version}-%{release}
 Requires: kded-license = %{version}-%{release}
-Requires: kded-man = %{version}-%{release}
 
 %description bin
 bin components for the kded package.
@@ -56,6 +55,7 @@ Requires: kded-lib = %{version}-%{release}
 Requires: kded-bin = %{version}-%{release}
 Requires: kded-data = %{version}-%{release}
 Provides: kded-devel = %{version}-%{release}
+Requires: kded = %{version}-%{release}
 
 %description dev
 dev components for the kded package.
@@ -88,22 +88,23 @@ man components for the kded package.
 
 
 %prep
-%setup -q -n kded-5.55.0
+%setup -q -n kded-5.56.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1549763576
+export SOURCE_DATE_EPOCH=1552168959
 mkdir -p clr-build
 pushd clr-build
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %cmake ..
-make  %{?_smp_mflags} VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1549763576
+export SOURCE_DATE_EPOCH=1552168959
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kded
 cp COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kded/COPYING.LGPL-2
