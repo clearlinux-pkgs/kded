@@ -6,7 +6,7 @@
 #
 Name     : kded
 Version  : 5.57.0
-Release  : 13
+Release  : 14
 URL      : https://download.kde.org/stable/frameworks/5.57/kded-5.57.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.57/kded-5.57.0.tar.xz
 Source99 : https://download.kde.org/stable/frameworks/5.57/kded-5.57.0.tar.xz.sig
@@ -95,7 +95,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1555198701
+export SOURCE_DATE_EPOCH=1555326177
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -103,7 +103,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1555198701
+export SOURCE_DATE_EPOCH=1555326177
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kded
 cp COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kded/COPYING.LGPL-2
