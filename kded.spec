@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kded
-Version  : 5.70.0
-Release  : 28
-URL      : https://download.kde.org/stable/frameworks/5.70/kded-5.70.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.70/kded-5.70.0.tar.xz
-Source1  : https://download.kde.org/stable/frameworks/5.70/kded-5.70.0.tar.xz.sig
+Version  : 5.71.0
+Release  : 29
+URL      : https://download.kde.org/stable/frameworks/5.71/kded-5.71.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.71/kded-5.71.0.tar.xz
+Source1  : https://download.kde.org/stable/frameworks/5.71/kded-5.71.0.tar.xz.sig
 Summary  : Extensible deamon for providing system level services
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
@@ -17,6 +17,7 @@ Requires: kded-bin = %{version}-%{release}
 Requires: kded-data = %{version}-%{release}
 Requires: kded-license = %{version}-%{release}
 Requires: kded-man = %{version}-%{release}
+Requires: kded-services = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : extra-cmake-modules-data
@@ -41,6 +42,7 @@ Summary: bin components for the kded package.
 Group: Binaries
 Requires: kded-data = %{version}-%{release}
 Requires: kded-license = %{version}-%{release}
+Requires: kded-services = %{version}-%{release}
 
 %description bin
 bin components for the kded package.
@@ -82,16 +84,24 @@ Group: Default
 man components for the kded package.
 
 
+%package services
+Summary: services components for the kded package.
+Group: Systemd services
+
+%description services
+services components for the kded package.
+
+
 %prep
-%setup -q -n kded-5.70.0
-cd %{_builddir}/kded-5.70.0
+%setup -q -n kded-5.71.0
+cd %{_builddir}/kded-5.71.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1589221711
+export SOURCE_DATE_EPOCH=1592255690
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -107,11 +117,11 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1589221711
+export SOURCE_DATE_EPOCH=1592255690
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kded
-cp %{_builddir}/kded-5.70.0/COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kded/ba8966e2473a9969bdcab3dc82274c817cfd98a1
-cp %{_builddir}/kded-5.70.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kded/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/kded-5.71.0/COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kded/ba8966e2473a9969bdcab3dc82274c817cfd98a1
+cp %{_builddir}/kded-5.71.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kded/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -154,3 +164,7 @@ popd
 /usr/share/man/ru/man8/kded5.8
 /usr/share/man/sv/man8/kded5.8
 /usr/share/man/uk/man8/kded5.8
+
+%files services
+%defattr(-,root,root,-)
+/usr/lib/systemd/user/plasma-kded.service
