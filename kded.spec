@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kded
-Version  : 5.71.0
-Release  : 29
-URL      : https://download.kde.org/stable/frameworks/5.71/kded-5.71.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.71/kded-5.71.0.tar.xz
-Source1  : https://download.kde.org/stable/frameworks/5.71/kded-5.71.0.tar.xz.sig
+Version  : 5.73.0
+Release  : 30
+URL      : https://download.kde.org/stable/frameworks/5.73/kded-5.73.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.73/kded-5.73.0.tar.xz
+Source1  : https://download.kde.org/stable/frameworks/5.73/kded-5.73.0.tar.xz.sig
 Summary  : Extensible deamon for providing system level services
 Group    : Development/Tools
 License  : LGPL-2.0 LGPL-2.1
@@ -93,15 +93,15 @@ services components for the kded package.
 
 
 %prep
-%setup -q -n kded-5.71.0
-cd %{_builddir}/kded-5.71.0
+%setup -q -n kded-5.73.0
+cd %{_builddir}/kded-5.73.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1592255690
+export SOURCE_DATE_EPOCH=1597699095
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -113,15 +113,15 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
-make  %{?_smp_mflags}  VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1592255690
+export SOURCE_DATE_EPOCH=1597699095
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kded
-cp %{_builddir}/kded-5.71.0/COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kded/ba8966e2473a9969bdcab3dc82274c817cfd98a1
-cp %{_builddir}/kded-5.71.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kded/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/kded-5.73.0/COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kded/ba8966e2473a9969bdcab3dc82274c817cfd98a1
+cp %{_builddir}/kded-5.73.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kded/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -140,6 +140,7 @@ popd
 /usr/share/dbus-1/services/org.kde.kded5.service
 /usr/share/kservicetypes5/kdedmodule.desktop
 /usr/share/qlogging-categories5/kded.categories
+/usr/share/qlogging-categories5/kded.renamecategories
 
 %files dev
 %defattr(-,root,root,-)
