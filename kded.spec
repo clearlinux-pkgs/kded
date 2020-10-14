@@ -5,14 +5,14 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kded
-Version  : 5.73.0
-Release  : 30
-URL      : https://download.kde.org/stable/frameworks/5.73/kded-5.73.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.73/kded-5.73.0.tar.xz
-Source1  : https://download.kde.org/stable/frameworks/5.73/kded-5.73.0.tar.xz.sig
+Version  : 5.75.0
+Release  : 31
+URL      : https://download.kde.org/stable/frameworks/5.75/kded-5.75.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.75/kded-5.75.0.tar.xz
+Source1  : https://download.kde.org/stable/frameworks/5.75/kded-5.75.0.tar.xz.sig
 Summary  : Extensible deamon for providing system level services
 Group    : Development/Tools
-License  : LGPL-2.0 LGPL-2.1
+License  : LGPL-2.0
 Requires: kded-bin = %{version}-%{release}
 Requires: kded-data = %{version}-%{release}
 Requires: kded-license = %{version}-%{release}
@@ -93,15 +93,15 @@ services components for the kded package.
 
 
 %prep
-%setup -q -n kded-5.73.0
-cd %{_builddir}/kded-5.73.0
+%setup -q -n kded-5.75.0
+cd %{_builddir}/kded-5.75.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1597699095
+export SOURCE_DATE_EPOCH=1602700295
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -117,11 +117,11 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1597699095
+export SOURCE_DATE_EPOCH=1602700295
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kded
-cp %{_builddir}/kded-5.73.0/COPYING.LGPL-2 %{buildroot}/usr/share/package-licenses/kded/ba8966e2473a9969bdcab3dc82274c817cfd98a1
-cp %{_builddir}/kded-5.73.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kded/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/kded-5.75.0/LICENSES/LGPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/kded/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/kded-5.75.0/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kded/20079e8f79713dce80ab09774505773c926afa2a
 pushd clr-build
 %make_install
 popd
@@ -149,8 +149,7 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/kded/9a1929f4700d2407c70b507b3b2aaf6226a9543c
-/usr/share/package-licenses/kded/ba8966e2473a9969bdcab3dc82274c817cfd98a1
+/usr/share/package-licenses/kded/20079e8f79713dce80ab09774505773c926afa2a
 
 %files man
 %defattr(0644,root,root,0755)
