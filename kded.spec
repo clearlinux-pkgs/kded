@@ -6,7 +6,7 @@
 #
 Name     : kded
 Version  : 5.92.0
-Release  : 45
+Release  : 46
 URL      : https://download.kde.org/stable/frameworks/5.92/kded-5.92.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.92/kded-5.92.0.tar.xz
 Source1  : https://download.kde.org/stable/frameworks/5.92/kded-5.92.0.tar.xz.sig
@@ -16,6 +16,7 @@ License  : CC0-1.0 LGPL-2.0
 Requires: kded-bin = %{version}-%{release}
 Requires: kded-data = %{version}-%{release}
 Requires: kded-license = %{version}-%{release}
+Requires: kded-man = %{version}-%{release}
 Requires: kded-services = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
@@ -74,6 +75,14 @@ Group: Default
 license components for the kded package.
 
 
+%package man
+Summary: man components for the kded package.
+Group: Default
+
+%description man
+man components for the kded package.
+
+
 %package services
 Summary: services components for the kded package.
 Group: Systemd services
@@ -87,11 +96,15 @@ services components for the kded package.
 cd %{_builddir}/kded-5.92.0
 
 %build
+## build_prepend content
+# Make sure the package only builds if kdoctools has been updated first
+sed -i -r -e 's,(KF.?DocTools \$\{KF.?_DEP_VERSION\})(.*\))$,\1 REQUIRED \2,' CMakeLists.txt
+## build_prepend end
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1647293545
+export SOURCE_DATE_EPOCH=1648269932
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -107,7 +120,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1647293545
+export SOURCE_DATE_EPOCH=1648269932
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kded
 cp %{_builddir}/kded-5.92.0/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/kded/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0
@@ -142,6 +155,20 @@ popd
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/kded/20079e8f79713dce80ab09774505773c926afa2a
 /usr/share/package-licenses/kded/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/ca/man8/kded5.8
+/usr/share/man/de/man8/kded5.8
+/usr/share/man/es/man8/kded5.8
+/usr/share/man/it/man8/kded5.8
+/usr/share/man/man8/kded5.8
+/usr/share/man/nl/man8/kded5.8
+/usr/share/man/pt/man8/kded5.8
+/usr/share/man/pt_BR/man8/kded5.8
+/usr/share/man/ru/man8/kded5.8
+/usr/share/man/sv/man8/kded5.8
+/usr/share/man/uk/man8/kded5.8
 
 %files services
 %defattr(-,root,root,-)
