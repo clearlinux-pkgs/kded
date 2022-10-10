@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kded
-Version  : 5.98.0
-Release  : 103
-URL      : https://download.kde.org/stable/frameworks/5.98/kded-5.98.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.98/kded-5.98.0.tar.xz
-Source1  : https://download.kde.org/stable/frameworks/5.98/kded-5.98.0.tar.xz.sig
+Version  : 5.99.0
+Release  : 104
+URL      : https://download.kde.org/stable/frameworks/5.99/kded-5.99.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.99/kded-5.99.0.tar.xz
+Source1  : https://download.kde.org/stable/frameworks/5.99/kded-5.99.0.tar.xz.sig
 Summary  : Extensible deamon for providing system level services
 Group    : Development/Tools
 License  : CC0-1.0 LGPL-2.0
@@ -92,8 +92,8 @@ services components for the kded package.
 
 
 %prep
-%setup -q -n kded-5.98.0
-cd %{_builddir}/kded-5.98.0
+%setup -q -n kded-5.99.0
+cd %{_builddir}/kded-5.99.0
 
 %build
 ## build_prepend content
@@ -104,7 +104,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1664550324
+export SOURCE_DATE_EPOCH=1665436420
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -120,7 +120,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1664550324
+export SOURCE_DATE_EPOCH=1665436420
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kded
 cp %{_builddir}/kded-%{version}/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/kded/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0 || :
@@ -162,6 +162,7 @@ popd
 /usr/share/man/ca@valencia/man8/kded5.8
 /usr/share/man/de/man8/kded5.8
 /usr/share/man/es/man8/kded5.8
+/usr/share/man/fr/man8/kded5.8
 /usr/share/man/it/man8/kded5.8
 /usr/share/man/man8/kded5.8
 /usr/share/man/nl/man8/kded5.8
