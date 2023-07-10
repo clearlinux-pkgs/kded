@@ -7,7 +7,7 @@
 #
 Name     : kded
 Version  : 5.108.0
-Release  : 181
+Release  : 182
 URL      : https://download.kde.org/stable/frameworks/5.108/kded-5.108.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.108/kded-5.108.0.tar.xz
 Source1  : https://download.kde.org/stable/frameworks/5.108/kded-5.108.0.tar.xz.sig
@@ -109,7 +109,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689001655
+export SOURCE_DATE_EPOCH=1689004701
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -146,7 +146,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1689001655
+export SOURCE_DATE_EPOCH=1689004701
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kded
 cp %{_builddir}/kded-%{version}/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/kded/82da472f6d00dc5f0a651f33ebb320aa9c7b08d0 || :
