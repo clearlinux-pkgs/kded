@@ -1,5 +1,5 @@
 PKG_NAME := kded
-URL = https://download.kde.org/stable/frameworks/6.3/kded-6.3.0.tar.xz
+URL = https://download.kde.org/stable/frameworks/6.4/kded-6.4.0.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common
